@@ -1,0 +1,30 @@
+{
+  "_comment": "Starting point only. Generate the real file with `alexa-ai new mcp --name \"Local Pulse\" --locale en-US --mcp-server-url <your https url>/mcp` and copy these values in. Limits: name <=30 chars, shortDescription <=123, 3-4 examplePhrases <=200 each.",
+  "manifestVersion": "1.0",
+  "storeListing": {
+    "distributionCountries": ["US"],
+    "locales": {
+      "en-US": {
+        "name": "Local Pulse",
+        "shortDescription": "Hear how AI assistants recommend your business, across every location, and reply to reviews by voice.",
+        "fullDescription": "Local Pulse tells multi-location business owners how often ChatGPT, Gemini and Perplexity recommend them, which location needs attention, and which reviews are waiting for a reply. It drafts replies for you, and nothing is posted until you say yes.",
+        "examplePhrases": [
+          "Alexa, ask Local Pulse how my four clinics are showing up in AI search this week",
+          "Alexa, ask Local Pulse which location has unanswered reviews",
+          "Alexa, ask Local Pulse to draft replies to the negative reviews"
+        ],
+        "privacyAndCompliance": {
+          "privacyPolicyUrl": "https://YOUR-DOMAIN/privacy",
+          "termsOfUseUrl": "https://YOUR-DOMAIN/terms"
+        },
+        "mediaAssets": "TODO: icons.light in 72, 64, 88, 126, 180, 241 px; at least one 600x900 carousel image"
+      }
+    }
+  },
+  "integrations": [
+    {
+      "type": "MCP",
+      "config": { "endpoints": { "default": { "type": "HTTPS", "uri": "https://YOUR-MCP-HOST/mcp" } } }
+    }
+  ]
+}
