@@ -4,6 +4,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { createMcpExpressApp } from "@modelcontextprotocol/sdk/server/express.js";
+import express from "express";
 import type { Request, Response } from "express";
 import { registerTools } from "./tools.js";
 import { prewarmDrafts } from "./drafting.js";
@@ -46,6 +47,24 @@ const notAllowed = (_req: Request, res: Response) =>
   res.status(405).json({ jsonrpc: "2.0", error: { code: -32000, message: "Method not allowed" }, id: null });
 app.get("/mcp", notAllowed);
 app.delete("/mcp", notAllowed);
+// Simulated Alexa+ web client (talks to /mcp from the browser).
+app.use(express.static(new URL("../public", import.meta.url).pathname));
+// Neural voice for the web demo (Amazon Polly). 404s when Polly isn't reachable; the page falls back to the browser voice.
+app.get("/api/tts", async (req: Request, res: Response) => {
+  const text = String(req.query.text ?? "").slice(0, 600);
+  if (!text) return res.status(400).end();
+  try {
+    const { PollyClient, SynthesizeSpeechCommand } = await import("@aws-sdk/client-polly");
+    const polly = new PollyClient({ region: process.env.AWS_REGION ?? "us-east-1" });
+    const out = await polly.send(
+      new SynthesizeSpeechCommand({ Text: text, OutputFormat: "mp3", VoiceId: (process.env.POLLY_VOICE as never) ?? "Joanna", Engine: "neural" }),
+    );
+    res.type("audio/mpeg").send(Buffer.from(await out.AudioStream!.transformToByteArray()));
+  } catch (err) {
+    console.error("polly:", (err as Error).message);
+    res.status(503).end();
+  }
+});
 app.get("/ping", (_req: Request, res: Response) => res.json({ status: "healthy" }));
 
 const port = Number(process.env.PORT ?? 8000);

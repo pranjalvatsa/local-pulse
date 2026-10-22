@@ -19,7 +19,8 @@
     "zod": "^4.0.0"
   },
   "optionalDependencies": {
-    "@aws-sdk/client-bedrock-runtime": "^3.1153.0"
+    "@aws-sdk/client-bedrock-runtime": "^3.1153.0",
+    "@aws-sdk/client-polly": "^3.1155.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

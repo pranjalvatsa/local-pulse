@@ -45,7 +45,7 @@ export function registerTools(server: McpServer) {
         const speak =
           `${loc.shortName} scores ${r1(r.score)} out of 100 in AI search, ${verb(r)} from last week.` +
           (issue ? ` ${cap(issue.engine)} has the wrong ${issue.field} for it.` : "");
-        return reply(speak, issue ? `Want me to draft a listing fix for ${loc.shortName}?` : null, r);
+        return reply(speak, `Want to see the reviews waiting at ${loc.shortName}?`, r);
       }
       const reports = allReports();
       const avg = reports.reduce((s, r) => s + r.score, 0) / reports.length;
