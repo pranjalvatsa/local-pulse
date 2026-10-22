@@ -41,7 +41,7 @@ agentcore configure --entrypoint dist/index.js --protocol MCP   # or point it at
 agentcore launch
 ```
 
-Then add the runtime's invocation URL as an MCP server in the agent (Strands, Alexa+ action, or the web front end). Check the AgentCore docs for the current CLI flags; they change often.
+Then add the runtime's invocation URL as an MCP server in the agent or the Alexa+ add-on. Check the AgentCore docs for the current CLI flags; they change often.
 
 ## Swapping mock data for live data
 
