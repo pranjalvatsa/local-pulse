@@ -1,6 +1,6 @@
 # Built with (paste as tags)
 
-typescript, node.js, model-context-protocol, mcp, alexa, alexa-plus, alexa-ai-cli, amazon-web-services, amazon-bedrock, amazon-bedrock-agentcore, claude, docker, express.js, zod, google-business-profile, openai, gemini, perplexity
+typescript, node.js, model-context-protocol, mcp, alexa, alexa-plus, amazon-web-services, amazon-bedrock, amazon-bedrock-agentcore, claude, docker, express.js, zod, google-business-profile, openai, gemini, perplexity
 
 Only keep a tag if it's true when you submit. Add strands-agents, dynamodb, aws-lambda or amazon-polly only if you build those parts.
 

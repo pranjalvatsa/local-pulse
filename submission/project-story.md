@@ -23,7 +23,7 @@ Anything that goes public, like a review reply or a listing change, requires the
 ## How we built it
 
 - **MCP server (TypeScript, Streamable HTTP):** five tools, `get_ai_visibility_score`, `compare_locations`, `list_pending_reviews`, `draft_review_reply` and `approve_action`, built on the official MCP TypeScript SDK. The server is stateless, so it scales horizontally.
-- **Alexa+ MCP add-on:** the server is registered with Alexa+ through the Alexa AI CLI and tested in the Alexa+ Web Simulator.
+- **Alexa+-ready MCP server:** a self-hosted Streamable HTTP server (MCP spec 2025-11-25) with an add-on manifest ready for the Alexa AI CLI. Tools return voice-ready output because Alexa+ writes the spoken reply itself.
 - **Voice-shaped tool output:** every tool returns `{ speak, next_step, data }`: a sentence ready to be spoken, one suggested next step, and the full detail for screens.
 - **Scoring engine:** adapted from GrowthPro AI's production GEO engine. It runs distinct-intent queries (discovery, service, brand) across ChatGPT, Gemini and Perplexity and scores a position-weighted mention rate. We exclude direct brand-name queries because they inflate scores, and we flag answers that come from training data alone rather than live sources.
 
